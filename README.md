@@ -12,20 +12,26 @@ Download the dataset from Blackboard and drop the contents of the zip-file into 
 
 ### 2. Environment
 
-To install the environment, run <br />
+Install Mamba for package management:
 
 ```bash
-conda env create --file env.yml
+conda install -n base conda-forge::mamba
+```
+
+Create the environment:
+
+```bash
+mamba env create --file env.yml
 ```
 
 Activate the environment by running:
 
 ```bash
-conda activate tdt4173
+conda activate forecasting
 ```
 
 In order to update this environment run:
 
 ```bash
-conda env update --file env.yml --prune
+mamba env update --file env.yml --prune
 ```
