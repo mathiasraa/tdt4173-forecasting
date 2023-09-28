@@ -1,0 +1,11 @@
+gcloud ml-engine jobs submit training hptuning_$(date +"%Y%m%d_%H%M%S") \
+  --job-dir gs://neuralnet-ninjas/xgboost_job_dir \
+  --package-path ./hptuning \
+  --module-name hptuning.train \
+  --region europe-west4 \
+  --runtime-version=1.10 \
+  --scale-tier basic \
+  --config hptuning_config.yaml
+
+  
+  bucket = neuralnet-ninjas

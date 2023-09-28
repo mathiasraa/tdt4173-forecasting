@@ -70,6 +70,16 @@ def load_train_test(location="A"):
     return train[features], train[["y"]], test[features], test[["y"]]
 
 
+def merge_train_test(train, test):
+    train["set_type"] = "TRAIN"
+    test["set_type"] = "TEST"
+
+    # Concatenate the two dataframes vertically
+    combined_df = pd.concat([train, test])
+
+    return combined_df
+
+
 def load_val(location="A"):
     """
     Load validation data from location dataset
@@ -98,3 +108,17 @@ def load_val(location="A"):
     X_val.index = pd.to_datetime(X_val.index)
 
     return X_val
+
+
+def load_val_dates():
+    """
+    Output a list of validation dataset datetimes
+
+    Returns
+    -------
+    array: dates
+    """
+
+    test = pd.read_csv(f"{dir_path}/../../data/test.csv")
+
+    return test["time"].unique().tolist()

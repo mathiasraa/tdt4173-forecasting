@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+
+# hyperparam.yaml
+trainingInput:
+  hyperparameters:
+    goal: MAXIMIZE
+    maxTrials: 50
+    maxParallelTrials: 10
+    hyperparameterMetricTag: my_metric_tag
+    enableTrialEarlyStopping: TRUE 
+    params:
+    - parameterName: max_depth
+      type: INTEGER
+      minValue: 4
+      maxValue: 7
+    - parameterName: n_estimators
+      type: INTEGER
+      minValue: 60
+      maxValue: 130
+    - parameterName: min_child_weight
+      type: INTEGER
+      minValue: 1
+      maxValue: 5
+    - parameterName: colsample_bytree
+      type: DISCRETE
+      discreteValues: [
+          0.6,
+          0.7,
+          0.8
+      ]
+    - parameterName: subsample
+      type: DISCRETE
+      discreteValues: [
+        0.7, 0.8, 0.9, 1.0
+      ]
+    - parameterName: reg_alpha
+      type: DISCRETE
+      discreteValues: [
+        0, 0.01, 0.1, 1, 10
+      ]
+    - parameterName: gamma
+      type: DISCRETE
+      discreteValues: [
+        0, 0.1, 0.2, 0.3
+      ]
+    - parameterName: reg_lambda
+      type: DISCRETE
+      discreteValues: [
+        0, 0.01, 0.1, 1, 10
+      ]
+    - parameterName: eta
+      type: DISCRETE
+      discreteValues: [
+        0.005, 0.01, 0.1, 0.2
+      ]
+
+
