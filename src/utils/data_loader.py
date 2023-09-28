@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 
+from src.utils.cleaning import find_repeated_rows
+
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
@@ -70,6 +72,45 @@ def load_train_test(location="A"):
     return train[features], train[["y"]], test[features], test[["y"]]
 
 
+def load_all_locations():
+    X_result = pd.DataFrame()
+    y_result = pd.DataFrame()
+
+    for location in ("A", "B", "C"):
+        X_train, y_train, X_test, y_test = load_train_test(location)
+        X, y = merge_train_test(X_train, X_test), merge_train_test(y_train, y_test)
+
+        X = X.reset_index()
+        y = y.reset_index()
+
+        repeated_indices = find_repeated_rows(y)
+
+        X["location"] = location
+        y["location"] = location
+        X = X.drop(index=repeated_indices)
+        y = y.drop(index=repeated_indices)
+
+        X_result = pd.concat([X_result, X])
+        y_result = pd.concat([y_result, y])
+
+    return X_result, y_result
+
+
+def load_all_vals():
+    X_result = pd.DataFrame()
+
+    for location in ("A", "B", "C"):
+        X = load_val(location)
+
+        X = X.reset_index()
+
+        X["location"] = location
+
+        X_result = pd.concat([X_result, X])
+
+    return X_result
+
+
 def merge_train_test(train, test):
     train["set_type"] = "TRAIN"
     test["set_type"] = "TEST"
@@ -96,6 +137,8 @@ def load_val(location="A"):
     X_val_estimated = pd.read_parquet(
         f"{dir_path}/../../data/{location}/X_test_estimated.parquet"
     )
+
+    print(X_val_estimated[~X_val_estimated["absolute_humidity_2m:gm3"].isna()].shape)
 
     # Clean up feature-set for training data
     X_val = X_val_estimated.copy()

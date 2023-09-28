@@ -6,6 +6,3 @@ gcloud ml-engine jobs submit training hptuning_$(date +"%Y%m%d_%H%M%S") \
   --runtime-version=1.10 \
   --scale-tier basic \
   --config hptuning_config.yaml
-
-  
-  bucket = neuralnet-ninjas
