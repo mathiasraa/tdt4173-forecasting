@@ -78,6 +78,7 @@ def load_all_locations():
 
     for location in ("A", "B", "C"):
         X_train, y_train, X_test, y_test = load_train_test(location)
+
         X, y = merge_train_test(X_train, X_test), merge_train_test(y_train, y_test)
 
         X = X.reset_index()
@@ -137,8 +138,6 @@ def load_val(location="A"):
     X_val_estimated = pd.read_parquet(
         f"{dir_path}/../../data/{location}/X_test_estimated.parquet"
     )
-
-    print(X_val_estimated[~X_val_estimated["absolute_humidity_2m:gm3"].isna()].shape)
 
     # Clean up feature-set for training data
     X_val = X_val_estimated.copy()
