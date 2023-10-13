@@ -109,3 +109,11 @@ def create_time_features(df, col):
     df["dayofyear"] = df[col].dt.dayofyear
 
     return df
+
+
+def create_lag_features(df, columns, lag=-2):
+    df[[column + str(lag) for column in columns]] = (
+        df[columns].shift(lag).fillna(method="ffill").fillna(method="bfill")
+    )
+
+    return df

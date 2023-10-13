@@ -14,6 +14,7 @@ from .cleaning import (
     resample_hourly,
     create_time_features,
     find_repeated_indices,
+    create_lag_features,
 )
 
 __all__ = [
@@ -30,4 +31,5 @@ __all__ = [
     "resample_hourly",
     "create_time_features",
     "find_repeated_indices",
+    "create_lag_features",
 ]
