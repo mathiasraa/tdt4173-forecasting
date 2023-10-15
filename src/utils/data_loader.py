@@ -6,6 +6,28 @@ from src.utils.cleaning import find_repeated_rows
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
+def load_data():
+    data = {"A": {}, "B": {}, "C": {}}
+
+    for location in ("A", "B", "C"):
+        y = pd.read_parquet(f"{dir_path}/../../data/{location}/train_targets.parquet")
+        X_test_estimated = pd.read_parquet(
+            f"{dir_path}/../../data/{location}/X_test_estimated.parquet"
+        )
+        X_train_estimated = pd.read_parquet(
+            f"{dir_path}/../../data/{location}/X_train_estimated.parquet"
+        )
+        X_train_observed = pd.read_parquet(
+            f"{dir_path}/../../data/{location}/X_train_observed.parquet"
+        )
+        data[location]["y"] = y
+        data[location]["X_test_estimated"] = X_test_estimated
+        data[location]["X_train_estimated"] = X_train_estimated
+        data[location]["X_train_observed"] = X_train_observed
+
+    return data
+
+
 def load_train_test(location="A"):
     """
     Load training and test data from location dataset
