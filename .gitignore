@@ -1,3 +1,5 @@
 data/*
 !data/PLACE_DATASET_HERE
 !data/comparison
+AutogluonModels
+catboost_info
