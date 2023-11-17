@@ -2,6 +2,8 @@
 
 TDT4173 Machine Learning competition @ NTNU. Solar energy production forecasting on dataset provided by ANEO.
 
+ <a href="https://www.kaggle.com/competitions/solar-energy-production-forecasting/overview">View the competition on Kaggle</a>
+
 ## Setup
 
 Prerequisites: Anaconda
